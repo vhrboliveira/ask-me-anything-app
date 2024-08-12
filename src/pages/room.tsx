@@ -58,6 +58,12 @@ export function Room() {
       </form>
 
       <ol className="list-decimal list-outside px-3 space-y-8">
+        <Message text="Why are you learning Go?" reactionCount={12} />
+        <Message
+          text="What is concurrency (Solved)?"
+          reactionCount={10}
+          answered
+        />
       </ol>
     </div>
   );
