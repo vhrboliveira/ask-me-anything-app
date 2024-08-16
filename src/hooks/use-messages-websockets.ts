@@ -35,7 +35,9 @@ export function useMessagesWebSockets({ roomId }: UseMessagesWebSocketsParams) {
   const queryClient = useQueryClient()
 
   useEffect(() => {
-    const ws = new WebSocket(`${import.meta.env.VITE_APP_WS_URL}/${roomId}`)
+    const ws = new WebSocket(
+      `${import.meta.env.VITE_APP_WS_URL}/room/${roomId}`
+    )
 
     ws.onopen = () => {
       console.log("Websocket connected!!!")
