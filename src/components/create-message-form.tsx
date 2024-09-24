@@ -2,8 +2,10 @@ import { ArrowRight } from "lucide-react"
 import { useParams } from "react-router-dom"
 import { toast } from "sonner"
 import { createMessage } from "../http/create-message"
+import { useTranslations } from "next-intl"
 
 export function CreateMessageForm() {
+  const t = useTranslations("room")
   const { roomId } = useParams()
 
   if (!roomId) {
@@ -21,7 +23,7 @@ export function CreateMessageForm() {
       await createMessage({ message, roomId })
     } catch (error) {
       console.error("Error creating message: ", error)
-      toast.error("Error creating question.")
+      toast.error(t("errorCreatingMessage"))
     }
   }
 
@@ -33,7 +35,7 @@ export function CreateMessageForm() {
       <input
         type="text"
         name="message"
-        placeholder="What is your question?"
+        placeholder={t("questionPlaceholder")}
         autoComplete="off"
         className="flex-1 text-sm bg-transparent mx-2 outline-none text-zinc-100 placeholder:text-zinc-500"
         required
@@ -43,7 +45,7 @@ export function CreateMessageForm() {
         type="submit"
         className="bg-green-400 text-green-950 px-3 py-1.5 gap-1.5 flex items-center rounded-lg font-medium text-sm transition-colors hover:bg-green-500"
       >
-        Create Question
+        {t("createQuestion")}
         <ArrowRight className="size-4" />
       </button>
     </form>

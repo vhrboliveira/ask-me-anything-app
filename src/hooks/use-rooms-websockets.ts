@@ -1,7 +1,8 @@
 import { useQueryClient } from "@tanstack/react-query"
+import { useTranslations } from "next-intl"
 import { useEffect } from "react"
-import { GetRoomResponse } from "../http/get-rooms"
 import { toast } from "sonner"
+import { GetRoomResponse } from "../http/get-rooms"
 
 enum MessageKind {
   MessageKindRoomCreated = "room_created",
@@ -9,10 +10,17 @@ enum MessageKind {
 
 type WebhookMessage = {
   kind: MessageKind.MessageKindRoomCreated
-  value: { id: string; name: string }
+  value: {
+    id: string
+    name: string
+    created_at: string
+    creator_name: string
+    description: string
+  }
 }
 
 export function useRoomsWebSockets() {
+  const t = useTranslations("createRoom")
   const queryClient = useQueryClient()
 
   useEffect(() => {
@@ -38,12 +46,15 @@ export function useRoomsWebSockets() {
                 {
                   id: data.value.id,
                   name: data.value.name,
+                  createdAt: data.value.created_at,
+                  user: data.value.creator_name,
+                  description: data.value.description,
                 },
               ],
             }
           })
 
-          toast.info("New room was created!")
+          toast.info(t("createRoomSuccess"))
 
           break
         default:
@@ -54,5 +65,5 @@ export function useRoomsWebSockets() {
     return () => {
       ws.close()
     }
-  }, [queryClient])
+  }, [queryClient, t])
 }

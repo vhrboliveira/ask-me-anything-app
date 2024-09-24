@@ -12,12 +12,9 @@ enum MessageKind {
 type WebhookMessage =
   | {
       kind: MessageKind.MessageCreated
-      value: { id: string; message: string }
+      value: { id: string; message: string; created_at: string }
     }
-  | {
-      kind: MessageKind.MessageAnswered
-      value: { id: string }
-    }
+  | { kind: MessageKind.MessageAnswered; value: { id: string } }
   | {
       kind: MessageKind.MessageReactionAdded
       value: { id: string; count: number }
@@ -48,74 +45,82 @@ export function useMessagesWebSockets({ roomId }: UseMessagesWebSocketsParams) {
     }
 
     ws.onmessage = (event) => {
-      const data: WebhookMessage = JSON.parse(event.data)
+      try {
+        const data: WebhookMessage = JSON.parse(event.data)
 
-      switch (data.kind) {
-        case MessageKind.MessageCreated:
-          queryClient.setQueryData<GetRoomMessagesResponse>(
-            ["messages", roomId],
-            (state) => {
-              return {
-                messages: [
-                  ...(state?.messages ?? []),
-                  {
-                    id: data.value.id,
-                    text: data.value.message,
-                    reactionCount: 0,
-                    answered: false,
-                  },
-                ],
+        switch (data.kind) {
+          case MessageKind.MessageCreated:
+            queryClient.setQueryData<GetRoomMessagesResponse>(
+              ["messages", roomId],
+              (state) => {
+                return {
+                  messages: [
+                    ...(state?.messages ?? []),
+                    {
+                      id: data.value.id,
+                      text: data.value.message,
+                      reactionCount: 0,
+                      answered: false,
+                      createdAt: new Date(data.value.created_at).toISOString(),
+                    },
+                  ],
+                }
               }
-            }
-          )
+            )
 
-          break
+            break
 
-        case MessageKind.MessageReactionAdded:
-        case MessageKind.MessageReactionRemoved:
-          queryClient.setQueryData<GetRoomMessagesResponse>(
-            ["messages", roomId],
-            (state) => {
-              if (!state) {
-                return undefined
+          case MessageKind.MessageReactionAdded:
+          case MessageKind.MessageReactionRemoved:
+            queryClient.setQueryData<GetRoomMessagesResponse>(
+              ["messages", roomId],
+              (state) => {
+                if (!state) {
+                  return undefined
+                }
+
+                return {
+                  messages: state.messages.map((item) => {
+                    if (item.id === data.value.id) {
+                      return {
+                        ...item,
+                        createdAt: item.createdAt,
+                        reactionCount: data.value.count,
+                      }
+                    }
+
+                    return item
+                  }),
+                }
               }
+            )
 
-              return {
-                messages: state.messages.map((item) => {
-                  if (item.id === data.value.id) {
-                    return { ...item, reactionCount: data.value.count }
-                  }
+            break
+          case MessageKind.MessageAnswered:
+            queryClient.setQueryData<GetRoomMessagesResponse>(
+              ["messages", roomId],
+              (state) => {
+                if (!state) {
+                  return undefined
+                }
 
-                  return item
-                }),
+                return {
+                  messages: state.messages.map((item) => {
+                    if (item.id === data.value.id) {
+                      return { ...item, answered: true }
+                    }
+
+                    return item
+                  }),
+                }
               }
-            }
-          )
+            )
 
-          break
-        case MessageKind.MessageAnswered:
-          queryClient.setQueryData<GetRoomMessagesResponse>(
-            ["messages", roomId],
-            (state) => {
-              if (!state) {
-                return undefined
-              }
-
-              return {
-                messages: state.messages.map((item) => {
-                  if (item.id === data.value.id) {
-                    return { ...item, answered: true }
-                  }
-
-                  return item
-                }),
-              }
-            }
-          )
-
-          break
-        default:
-          break
+            break
+        }
+      } catch (error) {
+        console.error("Error parsing WebSocket message:", error)
+        console.log("Raw message data:", event.data)
       }
     }
 
