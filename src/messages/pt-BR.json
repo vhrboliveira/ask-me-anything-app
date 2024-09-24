@@ -1,0 +1,104 @@
+{
+  "common": {
+    "logout": "Sair",
+    "logoutSuccess": "Deslogado com sucesso",
+    "profile": "Perfil",
+    "language": {
+      "en": "Inglês",
+      "pt-BR": "Português"
+    }
+  },
+  "room": {
+    "id": "ID da sala",
+    "code": "Código",
+    "created": "Criado",
+    "share": "Compartilhar",
+    "creator": "Criado por",
+    "description": "Descrição",
+    "createQuestion": "Criar Pergunta",
+    "questionPlaceholder": "Qual é a sua pergunta?",
+    "noMessages": "Nenhuma mensagem disponível",
+    "loadingMessages": "Carregando mensagens...",
+    "noRoomsAvailable": "Nenhuma sala disponível",
+    "successfullySharedRoom": "O link da sala foi copiado para a sua área de transferência!",
+    "errorCreatingMessage": "Erro ao criar mensagem",
+    "errorReacting": "Não foi possível curtir a mensagem",
+    "errorRemovingReact": "Não foi possível remover curtida da mensagem",
+    "like": "Curtir"
+  },
+  "login": {
+    "loginTitle": "Entrar",
+    "emailPlaceholder": "Email",
+    "loginWithGoogle": "Entrar com Google",
+    "loginWithFacebook": "Entrar com Facebook",
+    "notLoggedIn": "Não logado",
+    "googleLoginFailed": "Falha ao entrar com Google",
+    "facebookLoginFailed": "Falha ao entrar com Facebook",
+    "profileError": "Email de usuário já registrado com uma conta social diferente"
+  },
+  "logout": {
+    "loggingOut": "Saindo..."
+  },
+  "profile": {
+    "profile": "Perfil",
+    "emailPlaceholder": "Email",
+    "useAccountPhoto": "Usar Foto da Conta",
+    "namePlaceholder": "Nome",
+    "saveButton": "Salvar",
+    "requiredFields": "ID e nome são obrigatórios",
+    "profileUpdated": "Perfil atualizado com sucesso",
+    "profileUpdateError": "Falha ao atualizar perfil"
+  },
+  "createRoom": {
+    "description": "Crie sua sala Ask Me Anything (AMA) e responda as perguntas com mais curtidas, relacionadas ao assunto que você deseja.",
+    "roomNamePlaceholder": "Nome da Sala",
+    "roomDescriptionPlaceholder": "Descrição da Sala",
+    "createRoomButton": "Criar Sala",
+    "availableRooms": "Salas disponíveis:",
+    "loading": "Carregando...",
+    "roomNotCreated": "Sala não criada",
+    "createRoomError": "Erro ao criar sala",
+    "createRoomSuccess": "Uma nova sala foi criada"
+  },
+  "termsAndPrivacy": {
+    "termsAndPrivacy": "Termos e Privacidade",
+    "termsOfService": "Termos de Serviço",
+    "privacyPolicy": "Política de Privacidade",
+    "termsOfServiceDescription": "Ao usar nosso serviço de Ask Me Anything (AMA), você concorda com estes termos. Fornecemos este serviço como está, e não fazemos nenhuma promessa ou garantia sobre este serviço.",
+    "termsOfServiceList": [
+      "Você deve fazer login com uma conta social para usar as funcionalidades completas deste serviço. Usamos OAuth (Google ou Facebook) para autenticar usuários. Não armazenamos senhas, e não temos acesso às senhas da sua conta social.",
+      "Você concorda em usar o serviço para criar e participar de salas AMA de forma responsável.",
+      "Reservamo-nos o direito de terminar ou suspender sua conta a nosso critério."
+    ],
+    "privacyPolicyDescription": [
+      "Nós usamos cookies HTTP-only para autenticação. Estes cookies são automaticamente deletados após 24 horas ou quando você faz logout.",
+      "Nós coletamos e armazenamos seu nome, email e foto de perfil para fornecer nosso serviço. Não compartilhamos esta informação com terceiros.",
+      "Nós coletamos e armazenamos as seguintes informações:"
+    ],
+    "privacyPolicyList": [
+      "Sua informação da conta (nome, email e bio opcional)",
+      "Salas que você criar (associadas à sua conta), incluindo nomes das salas e datas de criação",
+      "Mensagens/Perguntas que você postar em salas (não são associadas à sua conta, são feitas anonimamente)",
+      "Sua reação às mensagens (você pode ver o número total de reações, mas só pode ver sua própria reação)"
+    ],
+    "privacyPolicyAdditional": [
+      "Usamos esta informação para fornecer e melhorar nosso serviço. Não vendemos ou compartilhamos suas informações pessoais com terceiros para qualquer propósito.",
+      "Nosso serviço usa conexões WebSocket para atualizações em tempo real. Isso nos permite fornecer a você notificações instantâneas sobre novas mensagens e atualizações de sala."
+    ],
+    "backToHome": "Voltar para a página inicial"
+  },
+  "cookieBanner": {
+    "description": "Este site usa cookies HTTP-only para autenticação. Estes cookies são deletados após 24 horas ou quando você faz logout. Ao usar este site, você concorda com nossos ",
+    "termsOfServiceAndPrivacyPolicy": "Termos de Serviço e Política de Privacidade."
+  },
+  "footer": {
+    "allRightsReserved": "Todos os direitos reservados.",
+    "termsOfService": "Termos de Serviço",
+    "privacyPolicy": "Política de Privacidade"
+  },
+  "errorBoundary": {
+    "notFoundOrDenied": "Sala não encontrada ou acesso negado!",
+    "errorOccurred": "Ocorreu um erro:",
+    "unexpectedError": "Ocorreu um erro inesperado"
+  }
+}
