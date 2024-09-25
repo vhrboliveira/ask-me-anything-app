@@ -6,7 +6,7 @@ interface UserState {
   name: string | null
   created_at: string | null
   updated_at: string | null
-  avatar_url: string | null
+  photo: string | null
   enable_picture: boolean
   new_user: boolean
 }
@@ -17,7 +17,7 @@ const initialState: UserState = {
   name: null,
   created_at: null,
   updated_at: null,
-  avatar_url: null,
+  photo: null,
   enable_picture: false,
   new_user: false,
 }

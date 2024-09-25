@@ -9,7 +9,6 @@ import { LogoutButton } from "../components/logout-button"
 import { Messages } from "../components/messages"
 import { getRoom } from "../http/get-room"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
 
 export function Room() {
   const t = useTranslations("room")
@@ -20,29 +19,6 @@ export function Room() {
     queryKey: ["room", roomId],
     retry: false,
   })
-
-  const [creatorPhotoBase64, setCreatorPhotoBase64] = useState<string | null>(
-    null
-  )
-
-  useEffect(() => {
-    if (room?.creatorPhoto) {
-      const fetchImage = async () => {
-        const response = await fetch(room.creatorPhoto)
-        const contentType = response.headers.get("Content-Type")
-
-        if (contentType && contentType.startsWith("image/")) {
-          const blob = await response.blob()
-          const reader = new FileReader()
-          reader.onloadend = () => {
-            setCreatorPhotoBase64(reader.result as string)
-          }
-          reader.readAsDataURL(blob)
-        }
-      }
-      fetchImage()
-    }
-  }, [room?.creatorPhoto])
 
   function handleShareRoom() {
     const url = window.location.href.toString()
@@ -85,9 +61,9 @@ export function Room() {
         </div>
         <div className="flex items-center gap-4 bg-zinc-700/50 p-4 rounded-lg">
           <div className="flex-shrink-0">
-            {creatorPhotoBase64 ? (
+            {room?.creatorPhoto ? (
               <img
-                src={creatorPhotoBase64}
+                src={`data:image/jpeg;base64,${room?.creatorPhoto}`}
                 alt={room?.creatorName}
                 className="size-16 rounded-full"
               />

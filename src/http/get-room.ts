@@ -41,7 +41,7 @@ export async function getRoom({
 
   let creatorPhoto = ""
   if (data?.enable_picture) {
-    creatorPhoto = data.avatar_url
+    creatorPhoto = data.photo
   }
 
   return {
