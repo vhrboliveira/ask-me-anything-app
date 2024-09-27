@@ -42,7 +42,7 @@
   "profile": {
     "profile": "Perfil",
     "emailPlaceholder": "Email",
-    "useAccountPhoto": "Usar Foto da Conta",
+    "useAccountPhoto": "Usar minha foto da conta de login ao criar uma nova sala",
     "namePlaceholder": "Nome",
     "saveButton": "Salvar",
     "requiredFields": "ID e nome são obrigatórios",

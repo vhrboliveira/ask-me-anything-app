@@ -78,7 +78,12 @@ export function Profile() {
             type="checkbox"
             name="useAccountPhoto"
             className="mr-2"
-            defaultChecked={user?.enable_picture}
+            checked={user?.enable_picture}
+            onChange={(e) =>
+              setUser((prev) =>
+                prev ? { ...prev, enable_picture: e.target.checked } : prev
+              )
+            }
           />
           {t("useAccountPhoto")}
         </label>

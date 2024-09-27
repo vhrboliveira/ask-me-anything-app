@@ -42,7 +42,7 @@
   "profile": {
     "profile": "Profile",
     "emailPlaceholder": "Email",
-    "useAccountPhoto": "Use my login account photo",
+    "useAccountPhoto": "Use my login account photo when creating a room",
     "namePlaceholder": "Name",
     "saveButton": "Save",
     "requiredFields": "ID and name are required",
