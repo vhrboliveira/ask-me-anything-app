@@ -106,7 +106,7 @@ export function Message({
   return (
     <li
       data-answered={answered}
-      className="pb-6 leading-relaxed text-zinc-100 border-b border-b-0.5 border-zinc-700 last:border-none data-[answered=true]:opacity-100 data-[answered=true]:text-amber-300"
+      className="pb-6 leading-relaxed text-zinc-100 border-b border-b-0.5 border-zinc-700 last:border-none data-[answered=true]:text-amber-300"
     >
       {text}
       <span className="text-xs mt-0.5 flex py-0 font-normal">
@@ -125,6 +125,7 @@ export function Message({
             autoComplete="off"
             className="flex-1 text-sm bg-transparent mx-2 outline-none text-zinc-100 placeholder:text-zinc-500  data-[answered=true]:text-amber-300"
             required
+            disabled={answered}
             value={currentAnswer}
             onChange={(e) => {
               setCurrentAnswer(e.target.value)
