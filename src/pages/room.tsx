@@ -32,9 +32,9 @@ export function Room() {
   }
 
   return (
-    <div className="mx-auto max-w-[95%] flex flex-col gap-6 pb-10 px-2">
-      <div className="flex flex-col gap-4 bg-zinc-800 rounded-lg p-4">
-        <div className="flex items-center justify-between">
+    <div className="mx-auto max-w-[90%] flex flex-col gap-6 pb-10 px-2">
+      <div className="flex flex-col gap-4 w-full bg-zinc-800 rounded-lg p-4">
+        <div className="flex items-center justify-between w-full">
           <a href="/#" className="flex-shrink-0">
             <Logo />
           </a>
@@ -86,8 +86,10 @@ export function Room() {
 
       <CreateMessageForm />
 
+      <div className="h-px w-full bg-zinc-700" />
+
       <Suspense fallback={<p>{t("loadingMessages")}</p>}>
-        <Messages />
+        <Messages userId={room?.userId ?? ""} />
       </Suspense>
     </div>
   )

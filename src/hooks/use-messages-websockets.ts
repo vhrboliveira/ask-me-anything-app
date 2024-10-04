@@ -14,7 +14,7 @@ type WebhookMessage =
       kind: MessageKind.MessageCreated
       value: { id: string; message: string; created_at: string }
     }
-  | { kind: MessageKind.MessageAnswered; value: { id: string } }
+  | { kind: MessageKind.MessageAnswered; value: { id: string; answer: string } }
   | {
       kind: MessageKind.MessageReactionAdded
       value: { id: string; count: number }
@@ -107,7 +107,11 @@ export function useMessagesWebSockets({ roomId }: UseMessagesWebSocketsParams) {
                 return {
                   messages: state.messages.map((item) => {
                     if (item.id === data.value.id) {
-                      return { ...item, answered: true }
+                      return {
+                        ...item,
+                        answered: true,
+                        answer: data.value.answer,
+                      }
                     }
 
                     return item

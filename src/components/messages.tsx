@@ -5,9 +5,17 @@ import { getRoomMessages } from "../http/get-room-messages"
 import { Message } from "./message"
 import { useTranslations } from "next-intl"
 
-export function Messages() {
+interface MessageProps {
+  userId: string
+}
+
+export function Messages({ userId }: MessageProps) {
   const t = useTranslations("room")
   const { roomId } = useParams()
+
+  if (!userId) {
+    throw new Error("Missing creator user ID")
+  }
 
   if (!roomId) {
     throw new Error("Messages components must be used within room page")
@@ -36,15 +44,17 @@ export function Messages() {
           {t("noMessages")}
         </div>
       ) : (
-        <ol className="list-decimal list-outside px-1 space-y-6">
+        <ol className="list-decimal list-outside px-1 space-y-4">
           {sortedMessages.map((message) => (
             <Message
               key={message.id}
               id={message.id}
               text={message.text}
               reactionCount={message.reactionCount}
+              answer={message.answer}
               answered={message.answered}
               createdAt={message.createdAt}
+              userId={userId}
             />
           ))}
         </ol>

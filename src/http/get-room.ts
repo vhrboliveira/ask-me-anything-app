@@ -9,6 +9,7 @@ export interface Room {
   name: string
   createdAt: string
   creatorName: string
+  userId: string
   description: string
   creatorPhoto: string
 }
@@ -49,6 +50,7 @@ export async function getRoom({
     name: data.name,
     createdAt: data.created_at,
     creatorName: data.creator_name,
+    userId: data.user_id,
     description: data.description,
     creatorPhoto,
   }

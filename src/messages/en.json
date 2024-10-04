@@ -11,7 +11,7 @@
   "room": {
     "id": "Room ID",
     "code": "Code",
-    "created": "Created",
+    "created": "created",
     "share": "Share",
     "creator": "Created by",
     "description": "Description",
@@ -21,10 +21,16 @@
     "loadingMessages": "Loading messages...",
     "noRoomsAvailable": "No rooms available",
     "successfullySharedRoom": "The room URL was copied to your clipboard!",
+    "successfullyAnswered": "The message has been answered",
     "errorCreatingMessage": "Error creating message",
     "errorReacting": "Unable to like the message",
     "errorRemovingReact": "Unable to remove the like from message",
-    "like": "Like"
+    "errorAnsweringMessage": "Unable to answer the message",
+    "like": "Like",
+    "answer": "Answer",
+    "submit": "Submit",
+    "clickToSeeAnswer": "Click to see the answer",
+    "hideAnswer": "Click to hide the answer"
   },
   "login": {
     "loginTitle": "Login",

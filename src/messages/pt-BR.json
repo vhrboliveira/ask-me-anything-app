@@ -11,7 +11,7 @@
   "room": {
     "id": "ID da sala",
     "code": "Código",
-    "created": "Criado",
+    "created": "criado",
     "share": "Compartilhar",
     "creator": "Criado por",
     "description": "Descrição",
@@ -21,10 +21,16 @@
     "loadingMessages": "Carregando mensagens...",
     "noRoomsAvailable": "Nenhuma sala disponível",
     "successfullySharedRoom": "O link da sala foi copiado para a sua área de transferência!",
+    "successfullyAnswered": "A mensagem foi respondida com sucesso",
     "errorCreatingMessage": "Erro ao criar mensagem",
     "errorReacting": "Não foi possível curtir a mensagem",
     "errorRemovingReact": "Não foi possível remover curtida da mensagem",
-    "like": "Curtir"
+    "errorAnsweringMessage": "Não foi possível responder a mensagem",
+    "like": "Curtir",
+    "answer": "Resposta",
+    "submit": "Enviar",
+    "clickToSeeAnswer": "Clique para ver a resposta",
+    "hideAnswer": "Clique para ocultar a resposta"
   },
   "login": {
     "loginTitle": "Entrar",

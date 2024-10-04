@@ -10,6 +10,7 @@ export interface GetRoomMessagesResponse {
     text: string
     reactionCount: number
     answered: boolean
+    answer: string
     createdAt: string
   }[]
 }
@@ -44,6 +45,7 @@ export async function getRoomMessages({
       message: string
       reaction_count: number
       answered: boolean
+      answer: string
       created_at: string
     }> = await response.json()
 
@@ -54,6 +56,7 @@ export async function getRoomMessages({
           text: item.message,
           reactionCount: item.reaction_count,
           answered: item.answered,
+          answer: item.answer,
           createdAt: item.created_at,
         }
       }),
