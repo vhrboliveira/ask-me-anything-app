@@ -6,7 +6,7 @@ import { toast } from "sonner"
 import { createMessageAnswer } from "../http/create-message-answer"
 import { createMessageReaction } from "../http/create-message-reaction"
 import { removeMessageReaction } from "../http/remove-message-reaction"
-import { getCurrentUser } from "../http/user"
+import { getCurrentUser, UserInfo } from "../http/user"
 
 interface MessageProps {
   id: string
@@ -33,12 +33,14 @@ export function Message({
   const [isCreator, setCreator] = useState(false)
   const [currentAnswer, setCurrentAnswer] = useState(answer)
   const [showAnswer, setShowAnswer] = useState(false)
+  const [user, setUser] = useState<UserInfo | null>(null)
 
   useEffect(() => {
     getCurrentUser().then((user) => {
       if (user?.id === userId) {
         setCreator(true)
       }
+      setUser(user)
     })
   }, [userId])
 
@@ -47,33 +49,33 @@ export function Message({
   }
 
   async function createMessageReactionAction() {
-    if (!roomId) {
+    if (!roomId || !user) {
       return
     }
 
     try {
-      await createMessageReaction({ messageId, roomId })
-    } catch (error) {
-      console.error("Error creating message reaction: ", error)
-      toast.error(t("errorReacting"))
+      await createMessageReaction({ messageId, roomId, userId: user.id })
+      setHasReacted(true)
+    } catch (err) {
+      const error = err as Error
+      const msg = t("errorReacting") + ": " + error.message
+      toast.error(msg)
     }
-
-    setHasReacted(true)
   }
 
   async function removeMessageReactionAction() {
-    if (!roomId) {
+    if (!roomId || !user) {
       return
     }
 
     try {
-      await removeMessageReaction({ messageId, roomId })
-    } catch (error) {
-      console.error("Error removing message reaction: ", error)
-      toast.error(t("errorRemovingReact"))
+      await removeMessageReaction({ messageId, roomId, userId: user.id })
+      setHasReacted(false)
+    } catch (err) {
+      const error = err as Error
+      const msg = t("errorRemovingReact") + ": " + error.message
+      toast.error(msg)
     }
-
-    setHasReacted(false)
   }
 
   function handleClickAnswer() {
@@ -98,7 +100,6 @@ export function Message({
       toast.info(t("successfullyAnswered"))
     } catch (err) {
       const error = err as Error
-      console.error("Error answering question: ", error)
       toast.error(t("errorAnsweringMessage") + ": " + error.message)
     }
   }
