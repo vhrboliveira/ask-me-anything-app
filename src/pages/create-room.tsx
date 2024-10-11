@@ -14,9 +14,9 @@ export function CreateRoom() {
 
   async function handleCreateRoom(data: FormData) {
     const name = data.get("name")?.toString()
-    const description = data.get("description")?.toString()
+    const description = data.get("description")?.toString() ?? ""
 
-    if (!name || !description) {
+    if (!name) {
       return
     }
 
@@ -28,8 +28,7 @@ export function CreateRoom() {
       }
 
       navigate(`/room/${result.roomId}`)
-    } catch (error) {
-      console.error("Error: ", error)
+    } catch {
       toast.error(t("createRoomError"))
     }
   }
@@ -66,7 +65,6 @@ export function CreateRoom() {
             rows={3}
             autoComplete="off"
             className="flex-1 text-sm bg-transparent mx-2 outline-none text-zinc-100 placeholder:text-zinc-500 p-2 pl-3 rounded focus:ring-1 focus:ring-green-400 focus:ring-offset-zinc-950"
-            required
           />
 
           <button
