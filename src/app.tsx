@@ -65,12 +65,13 @@ const Layout = ({
   locale: LocaleType
 }) => {
   const location = useLocation()
+  const pagesWithoutProfile = ["/login", "/terms-and-privacy", "/profile"]
 
   return (
     <div className="flex flex-col min-h-screen bg-zinc-900">
       <div className="px-4 py-3 relative">
         <LanguageSwitcher setLocale={setLocale} currentLocale={locale} />
-        {location.pathname !== "/login" && <ProfileButton />}
+        {!pagesWithoutProfile.includes(location.pathname) && <ProfileButton />}
       </div>
       <Outlet />
       <Footer />
