@@ -4,6 +4,9 @@ import { useMessagesWebSockets } from "../hooks/use-messages-websockets"
 import { getRoomMessages } from "../http/get-room-messages"
 import { Message } from "./message"
 import { useTranslations } from "next-intl"
+import { useState, useEffect } from "react"
+import { UserInfo, getCurrentUser } from "../http/user"
+import { getRoomMessagesReactions } from "../http/get-room-messages-reactions"
 
 interface MessageProps {
   userId: string
@@ -12,6 +15,13 @@ interface MessageProps {
 export function Messages({ userId }: MessageProps) {
   const t = useTranslations("room")
   const { roomId } = useParams()
+  const [user, setUser] = useState<UserInfo | null>(null)
+
+  useEffect(() => {
+    getCurrentUser().then((user) => {
+      setUser(user)
+    })
+  }, [])
 
   if (!userId) {
     throw new Error("Missing creator user ID")
@@ -21,21 +31,39 @@ export function Messages({ userId }: MessageProps) {
     throw new Error("Messages components must be used within room page")
   }
 
-  const { data } = useSuspenseQuery({
+  const { data: messagesData } = useSuspenseQuery({
     queryFn: () => getRoomMessages({ roomId }),
     queryKey: ["messages", roomId],
     retry: false,
   })
 
+  const { data: reactionsData } = useSuspenseQuery({
+    queryFn: () => {
+      if (!user) {
+        return { ids: [] }
+      }
+      return getRoomMessagesReactions({ roomId, userId: user.id! })
+    },
+    queryKey: ["messages_reactions", roomId, user?.id],
+    retry: false,
+  })
+
   useMessagesWebSockets({ roomId })
 
-  if (!data || !Array.isArray(data.messages)) {
+  if (!messagesData || !Array.isArray(messagesData.messages)) {
     return <div>{t("noMessages")}</div>
   }
 
-  const sortedMessages = data.messages.sort((a, b) => {
-    return b.reactionCount - a.reactionCount
-  })
+  const sortedMessages = messagesData.messages
+    .sort((a, b) => {
+      return b.reactionCount - a.reactionCount
+    })
+    .map((message) => {
+      return {
+        ...message,
+        userHasReacted: reactionsData?.ids.includes(message.id) || false,
+      }
+    })
 
   return (
     <>
@@ -54,7 +82,9 @@ export function Messages({ userId }: MessageProps) {
               answer={message.answer}
               answered={message.answered}
               createdAt={message.createdAt}
-              userId={userId}
+              creatorUserId={userId}
+              userHasReacted={message.userHasReacted}
+              userId={user?.id ?? ""}
             />
           ))}
         </ol>

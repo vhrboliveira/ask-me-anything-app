@@ -1,20 +1,21 @@
 import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { toast } from "sonner"
 import { createMessageAnswer } from "../http/create-message-answer"
 import { createMessageReaction } from "../http/create-message-reaction"
 import { removeMessageReaction } from "../http/remove-message-reaction"
-import { getCurrentUser, UserInfo } from "../http/user"
 
 interface MessageProps {
   id: string
   text: string
   reactionCount: number
   createdAt: string
+  creatorUserId: string
   userId: string
   answer: string
+  userHasReacted: boolean
   answered?: boolean
 }
 
@@ -23,38 +24,38 @@ export function Message({
   text,
   reactionCount,
   createdAt,
+  creatorUserId,
   userId,
+  userHasReacted,
   answer = "",
   answered = false,
 }: MessageProps) {
   const t = useTranslations("room")
-  const [hasReacted, setHasReacted] = useState(false)
+  const [hasReacted, setHasReacted] = useState(userHasReacted)
   const { roomId } = useParams()
   const [isCreator, setCreator] = useState(false)
   const [currentAnswer, setCurrentAnswer] = useState(answer)
   const [showAnswer, setShowAnswer] = useState(false)
-  const [user, setUser] = useState<UserInfo | null>(null)
 
   useEffect(() => {
-    getCurrentUser().then((user) => {
-      if (user?.id === userId) {
-        setCreator(true)
-      }
-      setUser(user)
-    })
-  }, [userId])
+    setCreator(creatorUserId === userId)
+  }, [creatorUserId, userId])
+
+  useEffect(() => {
+    setHasReacted(userHasReacted)
+  }, [userHasReacted])
 
   if (!roomId) {
     throw new Error("Messages components must be used within room page")
   }
 
   async function createMessageReactionAction() {
-    if (!roomId || !user) {
+    if (!roomId || !userId) {
       return
     }
 
     try {
-      await createMessageReaction({ messageId, roomId, userId: user.id })
+      await createMessageReaction({ messageId, roomId, userId })
       setHasReacted(true)
     } catch (err) {
       const error = err as Error
@@ -64,18 +65,19 @@ export function Message({
   }
 
   async function removeMessageReactionAction() {
-    if (!roomId || !user) {
+    if (!roomId || !userId) {
       return
     }
 
     try {
-      await removeMessageReaction({ messageId, roomId, userId: user.id })
-      setHasReacted(false)
+      await removeMessageReaction({ messageId, roomId, userId })
     } catch (err) {
       const error = err as Error
       const msg = t("errorRemovingReact") + ": " + error.message
       toast.error(msg)
     }
+
+    setHasReacted(false)
   }
 
   function handleClickAnswer() {

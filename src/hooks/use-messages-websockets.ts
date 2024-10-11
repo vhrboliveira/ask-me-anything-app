@@ -61,6 +61,7 @@ export function useMessagesWebSockets({ roomId }: UseMessagesWebSocketsParams) {
                       text: data.value.message,
                       reactionCount: 0,
                       answered: false,
+                      answer: "",
                       createdAt: new Date(data.value.created_at).toISOString(),
                     },
                   ],
