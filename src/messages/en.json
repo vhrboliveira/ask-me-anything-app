@@ -71,7 +71,9 @@
     "termsAndPrivacy": "Terms and Privacy",
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy",
+    "dataDeletion": "Data Deletion",
     "termsOfServiceDescription": "By using our Ask Me Anything (AMA) service, you agree to these terms. We provide this service as is, and we make no promises or guarantees about this service.",
+    "dataDeletionDescription": "You can request the deletion of your data through the following email: vitor@vhrbo.tech requesting the deletion of your data. Once you delete your data, all rooms created by you will be deleted, including all questions and answers.",
     "termsOfServiceList": [
       "You must Continue with a social account to use the full features of this service. We use OAuth (Google or Facebook) to authenticate users. We do not store any passwords, and we do not have access to your social account passwords.",
       "You agree to use the service for creating and participating in AMA rooms responsibly.",

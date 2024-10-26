@@ -71,7 +71,9 @@
     "termsAndPrivacy": "Termos e Privacidade",
     "termsOfService": "Termos de Serviço",
     "privacyPolicy": "Política de Privacidade",
+    "dataDeletion": "Exclusão de Dados",
     "termsOfServiceDescription": "Ao usar nosso serviço de Ask Me Anything (AMA), você concorda com estes termos. Fornecemos este serviço como está, e não fazemos nenhuma promessa ou garantia sobre este serviço.",
+    "dataDeletionDescription": "Você pode solicitar a exclusão de seus dados através da página de perfil ou entrando em contato com o seguinte email: vitor@vhrbo.tech solicitando a exclusão de seus dados. Ao exlcuir seus dados, todas salas criadas pelo usuário serão excluidas, juntamente com todas as perguntas e respostas relacionadas. Todas as suas reações em salas e perguntas serão também excluídas.",
     "termsOfServiceList": [
       "Você deve fazer login com uma conta social para usar as funcionalidades completas deste serviço. Usamos OAuth (Google ou Facebook) para autenticar usuários. Não armazenamos senhas, e não temos acesso às senhas da sua conta social.",
       "Você concorda em usar o serviço para criar e participar de salas AMA de forma responsável.",

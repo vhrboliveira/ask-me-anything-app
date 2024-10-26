@@ -42,6 +42,13 @@ export function TermsAndPrivacy() {
         ))}
       </section>
 
+      <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-4 text-zinc-200">
+          {t("dataDeletion")}
+        </h2>
+        <p className="text-zinc-300 mb-4">{t("dataDeletionDescription")}</p>
+      </section>
+
       <Link to="/" className="text-green-400 hover:underline">
         {t("backToHome")}
       </Link>
