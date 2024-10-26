@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
-import { Github, Linkedin } from "lucide-react"
-import InstagramIcon from "@mui/icons-material/Instagram"
+import { Github, Linkedin, Mail } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 export function Footer() {
@@ -36,12 +35,12 @@ export function Footer() {
             <Linkedin size={20} />
           </a>
           <a
-            href="https://instagram.com/vhrb.oliveira"
+            href="mailto:vitor@vhrbo.tech"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-green-400"
           >
-            <InstagramIcon fontSize="small" />
+            <Mail fontSize="small" />
           </a>
         </div>
       </div>
