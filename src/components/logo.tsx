@@ -1,5 +1,3 @@
-import "../fonts.css"
-
 export default function Logo() {
   return (
     <svg width="220" height="100" xmlns="http://www.w3.org/2000/svg">
