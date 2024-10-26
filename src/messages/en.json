@@ -33,6 +33,7 @@
     "hideAnswer": "Click to hide the answer"
   },
   "login": {
+    "loginDescription": "Login to ask questions or create your AMA (Ask Me Anything) room and answer the questions with more likes, related to the topic you want.",
     "loginTitle": "Login",
     "emailPlaceholder": "Email",
     "loginWithGoogle": "Continue with Google",

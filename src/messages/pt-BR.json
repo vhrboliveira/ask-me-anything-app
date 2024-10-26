@@ -33,6 +33,7 @@
     "hideAnswer": "Clique para ocultar a resposta"
   },
   "login": {
+    "loginDescription": "Entre para perguntar ou criar sua sala Ask Me Anything (AMA) e responda as perguntas com mais curtidas, relacionadas ao assunto que você deseja.",
     "loginTitle": "Entrar",
     "emailPlaceholder": "Email",
     "loginWithGoogle": "Entrar com Google",

@@ -64,7 +64,11 @@ export function Login() {
         {t("loginTitle")}
       </h2>
 
-      <div className="mt-4 flex flex-col">
+      <p className="text-zinc-300 text-center font-bold text-xl">
+        {t("loginDescription")}
+      </p>
+
+      <div className="mt-6 flex flex-col max-w-[50%] mx-auto">
         <button
           onClick={handleGoogleLogin}
           className="mb-4 bg-zinc-100 text-zinc-600 py-2 px-4 rounded hover:bg-zinc-300 flex items-center justify-center"
